@@ -1,7 +1,10 @@
-/devenv*/
-*.zip
-*.crx
-*.xpi
-*.pyc
-*.pyo
-*.sh
+.DS_Store
+mykey.pem
+node_modules
+npm-debug.log
+build/*.crx
+build/dev
+build/prod
+build/updates.xml
+.tmp
+*.swp

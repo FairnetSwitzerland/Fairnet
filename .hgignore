@@ -1,9 +1,0 @@
-^devenv.*$
-
-syntax:glob
-*.zip
-*.crx
-*.xpi
-*.pyc
-*.pyo
-*.sh
