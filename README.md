@@ -13,8 +13,8 @@ You can download the plugin from Google Chrome Store. Just install and it's read
 # How to contribute
 There are some ways to do that, instead of writing a big text there, we will put bellow some URL's that will help you with that:
 
-* [Rob Allen's Guide to Contribute on GitHub] (https://akrabat.com/the-beginners-guide-to-contributing-to-a-github-project/)
-* [Matt Stauffer's Guide to Contribute on GitHub] (https://mattstauffer.co/blog/how-to-contribute-to-an-open-source-github-project-using-your-own-fork)
+* [Rob Allen's Guide to Contribute on GitHub](https://akrabat.com/the-beginners-guide-to-contributing-to-a-github-project/)
+* [Matt Stauffer's Guide to Contribute on GitHub](https://mattstauffer.co/blog/how-to-contribute-to-an-open-source-github-project-using-your-own-fork)
 
 # How to execute the plugin on development mode
 In order to test the plugin in an especific branch you can clone or download the code. After that, open Google Chrome and access the Extension page writing "chrome://extensions/", Click the “Developer mode” checkbox to activate it, and then click the “Load unpacked extension” button. Navigate to the extension’s directory and select the subfolder Fairnet\build\dev.
@@ -91,7 +91,7 @@ This project is an improved version of other open source ideas:
 * [Skeleton for Google Chrome extensions](https://github.com/salsita/chrome-extension-skeleton) - A good start point for a new chrome extension.
 * [Ad Block Plus](https://github.com/adblockplus/adblockpluschrome) - An extension that helps users block ads.
 * [EasyList](https://easylist.to/) -  Removes most adverts from international web pages, including unwanted frames, images, and objects. It is the most popular list used by many ad blockers and forms the basis of over a dozen combination and supplementary filter lists.
-* [Developer Guide for Google Chrome Plugin](https://developer.chrome.com/extensions/faq). - A important resource if you planto develop chrome extensions.
+* [Developer Guide for Google Chrome Plugin](https://developer.chrome.com/extensions/faq) - A important resource if you planto develop chrome extensions.
 
 # License
 Copyright 2017-2018 Fairnet.
