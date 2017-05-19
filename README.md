@@ -33,6 +33,7 @@ To install it, simply drag the file to your browser window.
 ## Installation:
 
 1- Install NodeJs
+
 2- Clone this repository:
 
     git clone git@github.com:FairnetSwitzerland/Fairnet.git Fairnet
