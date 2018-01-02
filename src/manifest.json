@@ -12,7 +12,14 @@
   }],
   "options_page": "html/options.html",
   "devtools_page": "html/devtools.html",
-  "permissions": [ "<all_urls>" ],
+  "permissions": [ 
+    "<all_urls>", 
+    "webRequest", 
+    "webRequestBlocking",
+    "tabs",
+    "webNavigation",
+    "management"
+  ],
   "web_accessible_resources": [ "js/*", "html/*", "css/*", "images/*", "/filters.txt" ],
   "content_security_policy": "script-src 'self'; object-src 'self'",
   "name": "Fairnet",

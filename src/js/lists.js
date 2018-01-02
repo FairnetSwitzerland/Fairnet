@@ -31,14 +31,6 @@ var all = [{
   "tagLang": ["vi"],
   "viewUrl": "https://raw.githubusercontent.com/abpvn/abpvn/master/filter/abpvn.txt"
 }, {
-  "descr": "This project was built based on Anti-Adblock Killer (by Reek), but is now significantly different. Anti-Adblock Killer Script was completely re-implemented. Anti-Adblock Killer Filter was mostly copied and concatenated to AdBlock Protector List.",
-  "descrSourceUrl": "https://github.com/jspenguin2017/AdBlockProtector",
-  "homeUrl": "https://jspenguin2017.github.io/AdBlockProtector/",
-  "issuesUrl": "https://github.com/jspenguin2017/AdBlockProtector/issues",
-  "list": "AdBlockProtector",
-  "related": ["AakList (Anti-Adblock Killer)"],
-  "viewUrl": "https://github.com/jspenguin2017/AdBlockProtector/blob/master/AdBlockProtectorList.txt"
-}, {
   "descr": "Blocks Japanese regional social network advertisements and trackers.",
   "homeUrl": "https://github.com/k2jp/abp-japanese-filters",
   "issuesUrl": "https://github.com/k2jp/abp-japanese-filters/issues",
@@ -1230,22 +1222,7 @@ var all = [{
   "list": "Greek AdBlock Filter",
   "tagLang": ["el"],
   "viewUrl": "https://raw.githubusercontent.com/kargig/greek-adblockplus-filter/master/void-gr-filters.txt"
-}, {
-  "descr": "A modern HOSTS list providing most cutting-edge of anti-[tracking, malware, advertisements and popups, clickjacking, statistics, analytics, bad redirections, bad/shock web-sites, filmsy webapps, shady android connections, junk, ..and foo].",
-  "descrSourceUrl": "https://github.com/eladkarako/hosts.eladkarako.com",
-  "donateUrl": "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=7994YX29444PA&lc=IL&item_name=Elad%20Karako%27s%20HOSTS&item_number=for_hosts_eladkarako_com&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted",
-  "homeUrl": "http://hosts.eladkarako.com/",
-  "issuesUrl": "https://github.com/eladkarako/hosts.eladkarako.com/issues",
-  "list": "HOSTS AdBlock",
-  "viewUrl": "https://raw.githubusercontent.com/eladkarako/hosts.eladkarako.com/master/build/hosts_adblock.txt"
-}, {
-  "descr": "Blocks annoyances.",
-  "donateUrl": "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=7994YX29444PA&lc=IL&item_name=Elad%20Karako%27s%20HOSTS&item_number=for_hosts_eladkarako_com&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted",
-  "homeUrl": "http://hosts.eladkarako.com/",
-  "issuesUrl": "https://github.com/eladkarako/hosts.eladkarako.com/issues",
-  "list": "HOSTS AdBlock Anti-Annoyance Bonus",
-  "viewUrl": "https://raw.githubusercontent.com/eladkarako/hosts.eladkarako.com/master/build/hosts_adblock_anti_annoyances.txt"
-}, {
+},{
   "descr": "Japanese ad servers hosts file.",
   "forumUrl": "http://potato.2ch.net/test/read.cgi/android/1450730522/",
   "homeUrl": "https://sites.google.com/site/hosts2ch/",
@@ -1534,13 +1511,6 @@ var all = [{
   "tagLang": ["fr"],
   "viewUrl": "https://easylist-downloads.adblockplus.org/liste_fr+easylist.txt"
 }, {
-  "descr": "Blocks malware.",
-  "forumUrl": "https://www.malwaredomainlist.com/forums/",
-  "homeUrl": "https://www.malwaredomainlist.com/",
-  "list": "Malware Domain List",
-  "related": ["Unified Hosts", "Unified Hosts + Gambling", "Unified Hosts + Porn", "Unified Hosts + Social", "Unified Hosts + Gambling + Porn", "Unified Hosts + Gambling + Social", "Unified Hosts + Porn + Social", "Unified Hosts + Gambling + Porn + Social"],
-  "viewUrl": "https://www.malwaredomainlist.com/hostslist/hosts.txt"
-}, {
   "descr": "Malware URLs is a daily updated and free for research purposes feed offered by Joxean Koret to be used by security researchers, anti-malware researchers, etc... It can also be used by individuals to protect themselves, as the format of the feed (plain text) can be used with tools like Adblock Plus or integrated easily with other tools.",
   "descrSourceUrl": "http://malwareurls.joxeankoret.com/",
   "email": "info@joxeankoret.com",
@@ -1819,16 +1789,6 @@ var all = [{
   "related": ["Ransomware Tracker CryptoWall Ransomware C2 URL Blocklist", "Ransomware Tracker Locky Ransomware Distribution Site URL Blocklist", "Ransomware Tracker TeslaCrypt Ransomware C2 URL Blocklist", "Ransomware Tracker TeslaCrypt Ransomware Distribution Site URL Blocklist"],
   "viewUrl": "https://ransomwaretracker.abuse.ch/downloads/RW_URLBL.txt"
 }, {
-  "descr": "Romanian ad block filtering list.",
-  "descrSourceUrl": "https://github.com/tcptomato/ROad-Block",
-  "email": "contact@adblock.ro",
-  "forumUrl": "https://muut.com/i/adblockro/comments",
-  "homeUrl": "https://www.adblock.ro/",
-  "issuesUrl": "https://github.com/tcptomato/ROad-Block/issues",
-  "list": "ROad-Block",
-  "tagLang": ["ro"],
-  "viewUrl": "https://road.adblock.ro/lista.txt"
-}, {
   "descr": "Romanian supplement for EasyList.",
   "descrSourceUrl": "https://adblockplus.org/subscriptions",
   "email": "mail@zoso.ro",
@@ -1910,14 +1870,7 @@ var all = [{
   "list": "Schack's Adblock Plus List",
   "tagLang": ["da"],
   "viewUrl": "https://adblock.dk/block.csv"
-}, {
-  "descr": "Adblock Plus for Japan domestic and Japanese correspondence Universal Filter.",
-  "descrSourceUrl": "http://www.schuzak.jp/other/abp.html",
-  "homeUrl": "http://www.schuzak.jp/other/abp.html",
-  "list": "Schuzak's Universal Filter",
-  "tagLang": ["ja"],
-  "viewUrl": "http://www.schuzak.jp/other/abp.conf"
-}, {
+},{
   "descr": "Whitelists the trackers on the Alaska Airlines shopping portal so that rewards can be credited.",
   "list": "Shopping Whitelist Alaska Airlines",
   "viewUrl": "https://www.mileageplanshopping.com/adBlockWhitelist.php"

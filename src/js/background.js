@@ -1,7 +1,9 @@
 import msg from './modules/msg';
 
-
 import lists from './lists.js';
+
+import { setTimeout } from 'timers';
+
 
 console.log(lists.all);
 
@@ -28,10 +30,8 @@ function logEvent(ev, context, tabId) {
   console.log(`${ev}: context = ${context}, tabId = ${tabId}`); // eslint-disable-line no-console
 }
 
-
 /** All domain filters */
 var filters = {};
-
 
 /**
  * Create the HTML to replace the ad, if needed
@@ -94,7 +94,9 @@ function doFilter(domain, callback) {
 function parseList() {
   console.log("Parsing the filters...");
   var lines = this.responseText.match(/[^\r?\n]+/g);
-
+  if (!lines) {
+    return;
+  }
   for (var index = 0; index < lines.length; ++index) {
 
     // If is a filter rule
@@ -123,18 +125,17 @@ function parseList() {
     }
 
   }
-  console.log("Filters loaded:");
-  console.log(filters);
+  console.log("Filters loaded:" + Object.keys(filters).length);
 }
 
 /**
  * Open the filter file
  * @param string url The url for the list
  */
-function loadList(url) {
+function loadList(url, callback) {
   console.log("Loading filter list....")
   var x = new XMLHttpRequest();
-  x.onload = parseList;
+  x.onload = callback;
   x.open("GET", url, true);
   x.send();
 }
@@ -144,33 +145,32 @@ function loadList(url) {
 //loadList(chrome.runtime.getURL("/filters.txt"));
 
 for (var count = 0; count < lists.all.length; ++count) {
-  //loadList(lists.all[count].viewUrl);
+  console.log( "Loading list from URL: "+ lists.all[count].viewUrl);
+  loadList(lists.all[count].viewUrl, parseList);
 }
 
-loadList("https://easylist.to/easylist/fanboy-social.txt");
-loadList("https://easylist.to/easylist/fanboy-annoyance.txt");
-loadList("https://easylist.to/easylist/easyprivacy.txt");
-loadList("https://easylist.to/easylist/easylist.txt");
-loadList("https://easylist.to/easylistgermany/easylistgermany.txt");
-loadList("https://easylist-downloads.adblockplus.org/easylistitaly.txt");
-loadList("https://easylist-downloads.adblockplus.org/easylistdutch.txt");
-loadList("https://easylist-downloads.adblockplus.org/liste_fr.txt");
-loadList("https://easylist-downloads.adblockplus.org/easylistchina.txt");
-loadList("http://stanev.org/abp/adblock_bg.txt");
-loadList("https://raw.githubusercontent.com/heradhis/indonesianadblockrules/master/subscriptions/abpindo.txt");
-loadList("https://easylist-downloads.adblockplus.org/Liste_AR.txt");
-loadList("https://raw.githubusercontent.com/tomasko126/easylistczechandslovak/master/filters.txt");
-loadList("https://notabug.org/latvian-list/adblock-latvian/raw/master/lists/latvian-list.txt");
-loadList("https://raw.githubusercontent.com/easylist/EasyListHebrew/master/EasyListHebrew.txt");
-loadList("http://margevicius.lt/easylistlithuania.txt");
-loadList("https://easylist-downloads.adblockplus.org/antiadblockfilters.txt");
-loadList("https://raw.githubusercontent.com/rbrito/easylist-ptbr/master/adblock-rules.txt");
-loadList("http://adb.juvander.net/Finland_adb.txt");
-
+// loadList("https://easylist.to/easylist/fanboy-social.txt");
+// loadList("https://easylist.to/easylist/fanboy-annoyance.txt");
+// loadList("https://easylist.to/easylist/easyprivacy.txt");
+// loadList("https://easylist.to/easylist/easylist.txt");
+// loadList("https://easylist.to/easylistgermany/easylistgermany.txt");
+// loadList("https://easylist-downloads.adblockplus.org/easylistitaly.txt");
+// loadList("https://easylist-downloads.adblockplus.org/easylistdutch.txt");
+// loadList("https://easylist-downloads.adblockplus.org/liste_fr.txt");
+// loadList("https://easylist-downloads.adblockplus.org/easylistchina.txt");
+// loadList("http://stanev.org/abp/adblock_bg.txt");
+// loadList("https://raw.githubusercontent.com/heradhis/indonesianadblockrules/master/subscriptions/abpindo.txt");
+// loadList("https://easylist-downloads.adblockplus.org/Liste_AR.txt");
+// loadList("https://raw.githubusercontent.com/tomasko126/easylistczechandslovak/master/filters.txt");
+// loadList("https://notabug.org/latvian-list/adblock-latvian/raw/master/lists/latvian-list.txt");
+// loadList("https://raw.githubusercontent.com/easylist/EasyListHebrew/master/EasyListHebrew.txt");
+// loadList("http://margevicius.lt/easylistlithuania.txt");
+// loadList("https://easylist-downloads.adblockplus.org/antiadblockfilters.txt");
+// loadList("https://raw.githubusercontent.com/rbrito/easylist-ptbr/master/adblock-rules.txt");
+// loadList("http://adb.juvander.net/Finland_adb.txt");
 
 // This is a test!
-setTimeout(function () { doFilter("youtube.com", function () { }) }, 1000);
-
+//setTimeout(function () { doFilter("youtube.com", function () { }) }, 1000);
 
 var handlers = {};
 handlers.onConnect = logEvent.bind(null, 'onConnect');
@@ -180,3 +180,38 @@ handlers.doReplace = doReplace
 const message = msg.init('bg', handlers);
 
 
+//import * as ABPFilterParser from './abp-filter-parser.js';
+// var parsedFilter = {};
+
+// function saveParsedFilter(){
+//   ABPFilterParser.parse(this.responseText, parsedFilter);
+//   console.log(parsedFilter);
+// }
+
+// loadList("https://easylist.to/easylist/easylist.txt", saveParsedFilter);
+
+
+
+// chrome.webRequest.onBeforeRequest.addListener(
+//   function(request){ 
+
+//     var tabDomain = new URL(chrome.tabs.get(request.tabId, function(){}).url).hostname;
+//     var urlToCheck = request.url;
+
+//     console.log("Request from domain "+ tabDomain + ". To URL: "+  urlToCheck);
+
+//     if (
+//       ABPFilterParser.matches(
+//         parsedFilter, 
+//         request.url, { domain:  tabDomain, elementTypeMaskMap: ABPFilterParser.elementTypes.SCRIPT}
+//       )
+//       ) {
+//         return {cancel: true};  
+//     }
+//   },
+//   {
+//     urls: ["<all_urls>"], // Change this to a more specific pattern
+//     types: ["script"]
+//   },
+//   ["blocking"]
+// );

@@ -1,6 +1,6 @@
 {
 	"name": "fairnet-extension",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Fairnet plugin is an open source and free software that let you block advertisers and replace by those you want to support.",
 	"engines": {
 		"node": "7.0.0",
@@ -20,7 +20,8 @@
 	},
 	"dependencies": {
 		"jquery": "3.1.1",
-		"lodash": "4.17.4"
+		"lodash": "4.17.4",
+		"bloom-filter-js": "0.0.12"
 	},
 	"devDependencies": {
 		"babel-core": "6.24.1",

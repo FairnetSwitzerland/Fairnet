@@ -7,13 +7,12 @@ console.log('jQuery version:', $().jquery); // eslint-disable-line no-console
 
 var message = msg.init('ct', handlers.create('ct'));
 
+// NOT USED since we dont replace anymore, we just remove the element.
 function realReplace(sel, idx, html) {
     $(sel).each(function (index) {
         if (idx === index) {
             // Debug
             //$(this).css({ outline: '0px dashed red' });
-
-
 
             if ($(this).attr('data-replaced')){
                 $(this).attr('data-replaced', $(this).attr('data-replaced')+1);
@@ -36,29 +35,28 @@ function replaceElement(element, selector) {
     // Unbind all events from the node and its children
     element.unbind();
     element.find('*').unbind();
+    element.hide();
+    element.remove();
 
-
-
-    element.each(function (index) {
-
-        var h = $(this).height();
-        var w = $(this).width();
-
-        if (!$(this).attr('data-replaced') || $(this).attr('data-replaced') <= 0) {
-            message.bg('doReplace', selector, index, w, h, function (html) {
-                realReplace(selector, index, html);
-            });
-        }
-
-    });
+    // As we dont want to replace anything anymore, I commented the lines below.
+    // But The idea was to use the code below to replace the elements.
+    // element.each(function (index) {
+    //     var h = $(this).height();
+    //     var w = $(this).width();
+    //     if (!$(this).attr('data-replaced') || $(this).attr('data-replaced') <= 0) {
+    //         message.bg('doReplace', selector, index, w, h, function (html) {
+    //             realReplace(selector, index, html);
+    //         });
+    //     }
+    // });
 
 }
 
 function periodicCheck(selectors) {
     console.info("Checking selectors..."); // eslint-disable-line no-console
 
+    // The code below is used to replace the code elemennt by element. It is not used anymore.
     var elements = selectors.split(',');
-
     for (var index = 0; index < elements.length; ++index) {
         if (elements[index] && elements[index].length > 0 && $(elements[index])) {
             replaceElement($(elements[index]), elements[index]);
