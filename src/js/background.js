@@ -5,7 +5,10 @@ import lists from './lists.js';
 import { setTimeout } from 'timers';
 
 
-console.log(lists.all);
+import * as ABPFilterParser from './abp-filter-parser.js';
+var parsedFilter = {};
+
+//console.log(lists.all);
 
 // here we use SHARED message handlers, so all the contexts support the same
 // commands. in background, we extend the handlers with two special
@@ -43,9 +46,9 @@ var filters = {};
  */
 function doReplace(selector, index, width, height, callback) {
   if (width > 40 && height > 40) {
-      callback('<div style="width:'+width+'px;height:'+height+'px;background:#ff9966;display:block;"></div>');
-  }  else {
-      callback('<div style="width:'+width+'px;height:'+height+'px;background:transparent;display:block;outline:3px dashed #ff9966;outline-offset:-2px;"></div>');
+    callback('<div style="width:' + width + 'px;height:' + height + 'px;background:#ff9966;display:block;"></div>');
+  } else {
+    callback('<div style="width:' + width + 'px;height:' + height + 'px;background:transparent;display:block;outline:3px dashed #ff9966;outline-offset:-2px;"></div>');
   }
 }
 
@@ -70,7 +73,7 @@ function doFilter(domain, callback) {
 
   // For each key on the filters, try to see if the current domain engs with any one the domains of the filter.
   for (var index = 0; index < keys.length; ++index) {
-    if (keys[index] && keys[index].length > 0 && (domain.startsWith(keys[index]) || domain.endsWith("." + keys[index]) )){
+    if (keys[index] && keys[index].length > 0 && (domain.startsWith(keys[index]) || domain.endsWith("." + keys[index]))) {
 
       keysMatched.push(keys[index]);
 
@@ -92,7 +95,12 @@ function doFilter(domain, callback) {
  * Parse the list and let it ready to be used.
  */
 function parseList() {
-  console.log("Parsing the filters...");
+  // Parse filters to the network block
+  ABPFilterParser.parse(this.responseText, parsedFilter);
+  //console.log(parsedFilter);
+
+  // parse filters to the in-page element block
+  //console.log("Parsing the filters...");
   var lines = this.responseText.match(/[^\r?\n]+/g);
   if (!lines) {
     return;
@@ -133,7 +141,7 @@ function parseList() {
  * @param string url The url for the list
  */
 function loadList(url, callback) {
-  console.log("Loading filter list....")
+  //console.log("Loading filter list....")
   var x = new XMLHttpRequest();
   x.onload = callback;
   x.open("GET", url, true);
@@ -144,30 +152,29 @@ function loadList(url, callback) {
 //loadList(chrome.runtime.getURL("/filters.txt"));
 //loadList(chrome.runtime.getURL("/filters.txt"));
 
-for (var count = 0; count < lists.all.length; ++count) {
-  console.log( "Loading list from URL: "+ lists.all[count].viewUrl);
-  loadList(lists.all[count].viewUrl, parseList);
-}
+var parsedFilterBasic = {};
+ABPFilterParser.parse("||tpc.googlesyndication.com\n||googlesyndication.com/\n||doubleclick.net/\n||2mdn.net/\n||serving-sys.com/\n", parsedFilterBasic);
 
-// loadList("https://easylist.to/easylist/fanboy-social.txt");
-// loadList("https://easylist.to/easylist/fanboy-annoyance.txt");
-// loadList("https://easylist.to/easylist/easyprivacy.txt");
-// loadList("https://easylist.to/easylist/easylist.txt");
-// loadList("https://easylist.to/easylistgermany/easylistgermany.txt");
-// loadList("https://easylist-downloads.adblockplus.org/easylistitaly.txt");
-// loadList("https://easylist-downloads.adblockplus.org/easylistdutch.txt");
-// loadList("https://easylist-downloads.adblockplus.org/liste_fr.txt");
-// loadList("https://easylist-downloads.adblockplus.org/easylistchina.txt");
-// loadList("http://stanev.org/abp/adblock_bg.txt");
-// loadList("https://raw.githubusercontent.com/heradhis/indonesianadblockrules/master/subscriptions/abpindo.txt");
-// loadList("https://easylist-downloads.adblockplus.org/Liste_AR.txt");
-// loadList("https://raw.githubusercontent.com/tomasko126/easylistczechandslovak/master/filters.txt");
-// loadList("https://notabug.org/latvian-list/adblock-latvian/raw/master/lists/latvian-list.txt");
-// loadList("https://raw.githubusercontent.com/easylist/EasyListHebrew/master/EasyListHebrew.txt");
-// loadList("http://margevicius.lt/easylistlithuania.txt");
-// loadList("https://easylist-downloads.adblockplus.org/antiadblockfilters.txt");
-// loadList("https://raw.githubusercontent.com/rbrito/easylist-ptbr/master/adblock-rules.txt");
-// loadList("http://adb.juvander.net/Finland_adb.txt");
+loadList("https://easylist.to/easylist/easylist.txt", parseList);
+
+//loadList("https://easylist.to/easylist/fanboy-social.txt", parseList);
+//loadList("https://easylist.to/easylist/fanboy-annoyance.txt", parseList);
+//loadList("https://easylist.to/easylist/easyprivacy.txt", parseList);
+//loadList("https://easylist.to/easylistgermany/easylistgermany.txt", parseList);
+// loadList("https://easylist-downloads.adblockplus.org/easylistitaly.txt", parseList);
+// loadList("https://easylist-downloads.adblockplus.org/easylistdutch.txt", parseList);
+// loadList("https://easylist-downloads.adblockplus.org/liste_fr.txt", parseList);
+// loadList("https://easylist-downloads.adblockplus.org/easylistchina.txt", parseList);
+// loadList("http://stanev.org/abp/adblock_bg.txt", parseList);
+// loadList("https://raw.githubusercontent.com/heradhis/indonesianadblockrules/master/subscriptions/abpindo.txt", parseList);
+// loadList("https://easylist-downloads.adblockplus.org/Liste_AR.txt", parseList);
+// loadList("https://raw.githubusercontent.com/tomasko126/easylistczechandslovak/master/filters.txt", parseList);
+// loadList("https://notabug.org/latvian-list/adblock-latvian/raw/master/lists/latvian-list.txt", parseList);
+// loadList("https://raw.githubusercontent.com/easylist/EasyListHebrew/master/EasyListHebrew.txt", parseList);
+// loadList("http://margevicius.lt/easylistlithuania.txt", parseList);
+// loadList("https://easylist-downloads.adblockplus.org/antiadblockfilters.txt", parseList);
+// loadList("https://raw.githubusercontent.com/rbrito/easylist-ptbr/master/adblock-rules.txt", parseList);
+// loadList("http://adb.juvander.net/Finland_adb.txt", parseList);
 
 // This is a test!
 //setTimeout(function () { doFilter("youtube.com", function () { }) }, 1000);
@@ -180,38 +187,69 @@ handlers.doReplace = doReplace
 const message = msg.init('bg', handlers);
 
 
-//import * as ABPFilterParser from './abp-filter-parser.js';
-// var parsedFilter = {};
 
-// function saveParsedFilter(){
-//   ABPFilterParser.parse(this.responseText, parsedFilter);
-//   console.log(parsedFilter);
+
+// Below this line you will find the filters to block via network.
+
+function saveParsedFilter() {
+  ABPFilterParser.parse(this.responseText, parsedFilter);
+  console.log(parsedFilter);
+}
+
+//loadList("https://easylist.to/easylist/easylist.txt", saveParsedFilter);
+//loadList("https://easylist.to/easylist/fanboy-social.txt", saveParsedFilter);
+//loadList("https://easylist.to/easylist/fanboy-social.txt", saveParsedFilter);
+
+
+// First we need to keep track of all urls that 
+var tabsURLs = new Map();
+chrome.webRequest.onBeforeRequest.addListener(
+  function (request) {
+
+    if (request.tabId >= 0 && request.type === "main_frame") {
+      tabsURLs.set(request.tabId, request.url);
+    } else {
+
+      var tabURL = tabsURLs.get(request.tabId);
+      if (!tabURL) {
+        return;
+      }
+      var tabDomain = new URL(tabURL).hostname;
+      var urlToCheck = request.url;
+      console.debug("Analysing Request (" + request.type + ") from domain " + tabDomain + ". To URL: " + urlToCheck);
+
+      var type = ABPFilterParser.elementTypes.SCRIPT;
+
+      switch (request.type) {
+        case "xmlhttprequest": type = ABPFilterParser.elementTypes.XMLHTTPREQUEST; break;
+        case "sub_frame": type = ABPFilterParser.elementTypes.SUBDOCUMENT; break;
+        case "main_frame": type = ABPFilterParser.elementTypes.DOCUMENT; break;
+        case "other": type = ABPFilterParser.elementTypes.OTHER; break;
+        case "object": type = ABPFilterParser.elementTypes.OBJECT; break;
+        case "stylesheet": type = ABPFilterParser.elementTypes.STYLESHEET; break;
+        case "image": type = ABPFilterParser.elementTypes.IMAGE; break;
+        case "script": type = ABPFilterParser.elementTypes.SCRIPT; break;
+      }
+
+      if (ABPFilterParser.matches(parsedFilter,
+        request.url, { domain: tabDomain, elementTypeMaskMap: type }) || ABPFilterParser.matches(parsedFilterBasic,
+          request.url, { domain: tabDomain, elementTypeMaskMap: type })) {
+        console.log("BLOCKED Request from domain " + tabDomain + ". To URL: " + urlToCheck);
+        return { cancel: true };
+      }
+    }
+  },
+  {
+    urls: ['<all_urls>'],
+    types: [
+      'main_frame', "script", "image", "sub_frame", "stylesheet", "object", "xmlhttprequest", "csp_report", "media", "websocket", "other"
+    ],
+  },
+  ["blocking"]
+);
+
+
+// for (var count = 0; count < lists.all.length; ++count) {
+//   console.log("Loading list from URL: " + lists.all[count].viewUrl);
+//   loadList(lists.all[count].viewUrl, parseList);
 // }
-
-// loadList("https://easylist.to/easylist/easylist.txt", saveParsedFilter);
-
-
-
-// chrome.webRequest.onBeforeRequest.addListener(
-//   function(request){ 
-
-//     var tabDomain = new URL(chrome.tabs.get(request.tabId, function(){}).url).hostname;
-//     var urlToCheck = request.url;
-
-//     console.log("Request from domain "+ tabDomain + ". To URL: "+  urlToCheck);
-
-//     if (
-//       ABPFilterParser.matches(
-//         parsedFilter, 
-//         request.url, { domain:  tabDomain, elementTypeMaskMap: ABPFilterParser.elementTypes.SCRIPT}
-//       )
-//       ) {
-//         return {cancel: true};  
-//     }
-//   },
-//   {
-//     urls: ["<all_urls>"], // Change this to a more specific pattern
-//     types: ["script"]
-//   },
-//   ["blocking"]
-// );

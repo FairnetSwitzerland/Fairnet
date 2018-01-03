@@ -446,8 +446,13 @@ export function matchesFilter(parsedFilterData, input, contextParams = {}, cache
 
   // Check for a regex match
   if (parsedFilterData.isRegex) {
-    if (!parsedFilterData.regex) {
-      parsedFilterData.regex = new RegExp(parsedFilterData.data);
+    if (!parsedFilterData.regex) {      
+      try {
+        parsedFilterData.regex = new RegExp(parsedFilterData.data);
+      } catch (error) {
+        //console.debug("Problems with regex: " + parsedFilterData.data);
+        return false;
+      }      
     }
     return parsedFilterData.regex.test(input);
   }
